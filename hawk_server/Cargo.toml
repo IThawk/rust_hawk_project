@@ -28,3 +28,7 @@ structopt = { version = "0.3", default-features = false }
 serde_yaml ={version = "0.8.4"}
 hawk_config = {version = "0.1.0" ,path = "../hawk_config"}
 hawk_api = {version = "0.1.0" ,path = "../hawk_api"}
+actix-postgres = "0.1.0"
+postgres = "0.17.3"
+mysql = "18.2.0"
+tokio = "0.2"
