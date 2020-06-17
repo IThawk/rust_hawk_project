@@ -1,0 +1,6 @@
+[workspace]
+members = [
+   "hawk_client",
+   "hawk_server",
+   "hawk_config"
+]
