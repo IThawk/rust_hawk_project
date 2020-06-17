@@ -2,5 +2,6 @@
 members = [
    "hawk_client",
    "hawk_server",
-   "hawk_config"
+   "hawk_config",
+   "hawk_api"
 ]

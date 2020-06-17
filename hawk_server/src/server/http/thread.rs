@@ -7,7 +7,7 @@ use futures::StreamExt;
 use json::JsonValue;
 use redis_async::resp::RespValue;
 use serde::{Deserialize, Serialize};
-use super::super::model::redis::CacheInfo;
+use crate::hawk_api::model::redis::CacheInfo;
 use crate::config::config_center::ConfigCenter;
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -3,6 +3,7 @@ extern crate redis_async;
 #[macro_use]
 extern crate log;
 extern crate hawk_config;
+extern crate hawk_api;
 mod server;
 mod config;
 mod utils;
