@@ -1,78 +1,72 @@
-//
-//use std::{
-//    error, fmt, fs,
-//    path::{Path, PathBuf},
-//    thread,
-//    time::{Duration, SystemTime},
-//};
-//
-//fn read(path: String) {
-//    let path = path.as_ref().to_path_buf();
-//    let format = Format::from_path(&path)?;
-//    let source = read_config(&path)?;
-//// An Err here could come because mtime isn't available, so don't bail
-//    let modified = fs::metadata(&path).and_then(|m| m.modified()).ok();
-//    let config = format.parse(&source)?;
-//
-//    let refresh_rate = config.refresh_rate();
-//    let config = deserialize(&config, &deserializers);
-//}
-//
-//
-//enum Format {
-//    #[cfg(feature = "yaml_format")]
-//    Yaml,
-//    #[cfg(feature = "json_format")]
-//    Json,
-//    #[cfg(feature = "toml_format")]
-//    Toml,
-//    #[cfg(feature = "xml_format")]
-//    #[deprecated(since = "0.11.0")]
-//    Xml,
-//}
-//
-//impl Format {
-//    fn from_path(path: &Path) -> Result<Format, Box<dyn error::Error + Sync + Send>> {
-//        match path.extension().and_then(|s| s.to_str()) {
-//            #[cfg(feature = "yaml_format")]
-//            Some("yaml") | Some("yml") => Ok(Format::Yaml),
-//            #[cfg(not(feature = "yaml_format"))]
-//            Some("yaml") | Some("yml") => {
-//                Err("the `yaml_format` feature is required for YAML support".into())
-//            }
-//            #[cfg(feature = "json_format")]
-//            Some("json") => Ok(Format::Json),
-//            #[cfg(not(feature = "json_format"))]
-//            Some("json") => Err("the `json_format` feature is required for JSON support".into()),
-//
-//            #[cfg(feature = "toml_format")]
-//            Some("toml") => Ok(Format::Toml),
-//            #[cfg(not(feature = "toml_format"))]
-//            Some("toml") => Err("the `toml_format` feature is required for TOML support".into()),
-//
-//            #[cfg(feature = "xml_format")]
-//            Some("xml") => Ok(Format::Xml),
-//            #[cfg(not(feature = "xml_format"))]
-//            Some("xml") => Err("the `xml_format` feature is required for XML support".into()),
-//
-//            Some(f) => Err(format!("unsupported file format `{}`", f).into()),
-//            None => Err("unable to determine the file format".into()),
-//        }
-//    }
-//
-//    #[allow(unused_variables)]
-//    fn parse(&self, source: &str) -> Result<RawConfig, Box<dyn error::Error + Send + Sync>> {
-//        match *self {
-//            #[cfg(feature = "yaml_format")]
-//            Format::Yaml => ::serde_yaml::from_str(source).map_err(Into::into),
-//            #[cfg(feature = "json_format")]
-//            Format::Json => ::serde_json::from_str(source).map_err(Into::into),
-//            #[cfg(feature = "toml_format")]
-//            Format::Toml => ::toml::from_str(source).map_err(Into::into),
-//            #[cfg(feature = "xml_format")]
-//            Format::Xml => ::serde_xml_rs::from_reader::<_, RawConfigXml>(source.as_bytes())
-//                .map(Into::into)
-//                .map_err(|e| e.to_string().into()),
-//        }
-//    }
-//}
+extern crate serde_yaml;
+
+use crate::model::config::{Config, Redis};
+use crate::utils::file_utils::{read_file, write_file};
+use serde::de::DeserializeOwned;
+use serde::export::Result::Ok;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+pub fn read_yml<T>(path: &str) -> Result<T, String>
+    where
+        T: DeserializeOwned,
+        T: Serialize
+{
+    let a = read_file(path.to_string());
+    if let Ok(context) = a {
+        println!("{}", context);
+        let config = serde_yaml::from_str(&context);
+        // println!("{:?}", config);
+        if let Ok(content) = config {
+            return Ok(content);
+        }
+    }
+    Err("err".to_string())
+}
+
+pub fn write_yml<T>(path: &str, content: T) -> Result<(), String>
+    where
+        T: Serialize,
+{
+    // let a = read_file(path.to_string());
+    let config_opt = serde_yaml::to_string(&content);
+    if let Ok(context) = config_opt {
+        println!("{}", context);
+
+        // println!("{:?}", config);
+        return write_file(path.to_string(), context, false);
+    }
+    Err("err".to_string())
+}
+
+#[test]
+fn read_test() {
+    let point = Point { x: 1.0, y: 2.0 };
+    let a = read_file("./config/my.yml".to_string());
+    if let Ok(context) = a {
+        println!("{}", context);
+        let config: Config = serde_yaml::from_str(&context).unwrap();
+        println!("{:?}", config);
+    }
+    let s = serde_yaml::to_string(&point).unwrap();
+    assert_eq!(s, "---\nx: 1.0\ny: 2.0");
+
+    let deserialized_point: Point = serde_yaml::from_str(&s).unwrap();
+    assert_eq!(point, deserialized_point);
+}
+
+#[test]
+fn write_test() {
+    let redis = Redis { port: 6379 };
+    let redis = Some(redis);
+
+    let config = Config { redis, mysql: None };
+    let point = Point { x: 1.0, y: 2.0 };
+    let result = write_yml("./config/my.yml", config);
+    println!("{:?}", result)
+}

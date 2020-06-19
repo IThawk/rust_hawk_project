@@ -1,8 +1,8 @@
 use log::LevelFilter;
 use log4rs::append::console::ConsoleAppender;
 use log4rs::append::file::FileAppender;
-use log4rs::encode::pattern::PatternEncoder;
 use log4rs::config::{Appender, Config, Logger, Root};
+use log4rs::encode::pattern::PatternEncoder;
 
 pub fn log_main() {
     let stdout = ConsoleAppender::builder().build();
@@ -16,15 +16,17 @@ pub fn log_main() {
         .appender(Appender::builder().build("stdout", Box::new(stdout)))
         .appender(Appender::builder().build("requests", Box::new(requests)))
         .logger(Logger::builder().build("app::backend::db", LevelFilter::Info))
-        .logger(Logger::builder()
-            .appender("requests")
-            .additive(false)
-            .build("app::requests", LevelFilter::Info))
+        .logger(
+            Logger::builder()
+                .appender("requests")
+                .additive(false)
+                .build("app::requests", LevelFilter::Info),
+        )
         .build(
             Root::builder()
                 .appender("stdout")
                 .appender("requests")
-                .build(LevelFilter::Info)
+                .build(LevelFilter::Info),
         )
         .unwrap();
 

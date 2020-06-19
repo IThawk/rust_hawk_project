@@ -1,3 +1,5 @@
+use super::super::model::redis::CacheInfo;
+use crate::config::config_center::ConfigCenter;
 use actix::prelude::*;
 use actix_redis::{Command, RedisActor};
 use actix_web::{error, middleware, web, App, Error, HttpRequest, HttpResponse, HttpServer};
@@ -7,8 +9,6 @@ use futures::StreamExt;
 use json::JsonValue;
 use redis_async::resp::RespValue;
 use serde::{Deserialize, Serialize};
-use super::super::model::redis::CacheInfo;
-use crate::config::config_center::ConfigCenter;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MyObj {
@@ -24,7 +24,6 @@ async fn index(item: web::Json<MyObj>) -> HttpResponse {
 
 /// This handler uses json extractor
 async fn get_index(req: HttpRequest, item: web::Path<MyObj>) -> HttpResponse {
-
     //get param from url
     req.query_string();
     println!("model: {:?}", &item);
@@ -71,7 +70,6 @@ async fn index_mjsonrust(body: Bytes) -> Result<HttpResponse, Error> {
         .content_type("application/json")
         .body(injson.dump()))
 }
-
 
 async fn cache_stuff(
     info: web::Json<CacheInfo>,
@@ -157,14 +155,15 @@ pub async fn main() -> std::io::Result<()> {
                     .route(web::post().to(cache_stuff))
                     .route(web::delete().to(del_stuff)),
             )
-            .service(web::resource("/")
-                .route(web::post().to(index))
-                .route(web::get().to(get_index))
+            .service(
+                web::resource("/")
+                    .route(web::post().to(index))
+                    .route(web::get().to(get_index)),
             )
     })
-        .bind("127.0.0.1:8099")?
-        .run()
-        .await
+    .bind("127.0.0.1:8099")?
+    .run()
+    .await
 }
 
 #[cfg(test)]

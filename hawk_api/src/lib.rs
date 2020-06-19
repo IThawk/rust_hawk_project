@@ -1,14 +1,10 @@
 #[macro_use]
 extern crate log;
-pub mod utils;
+#[macro_use]
+extern crate serde_derive;
 pub mod model;
+pub mod utils;
 
-pub trait Connection{
+pub trait Connection {}
 
-}
-
-pub trait Server{
-
-}
-
-
+pub trait Server {}
