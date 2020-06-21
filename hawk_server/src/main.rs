@@ -4,15 +4,19 @@ extern crate redis_async;
 extern crate log;
 extern crate hawk_api;
 extern crate hawk_config;
-mod config;
+extern crate hawk_tools;
+
 mod server;
-mod utils;
-use crate::config::config_center::ConfigCenter;
-use config::log_main;
-use hawk_config::utils::file_utils::read_file;
+
+//use crate::config::config_center::ConfigCenter;
+use hawk_config::log_main;
+use hawk_tools::utils::file_utils::read_file;
 use server::http;
+use server::unix_socket;
 use std::sync::Arc;
 use std::thread;
+use hawk_tools::utils::os_utils;
+use hawk_api::model::config::Config;
 
 fn main() {
     //    make log by yml config
@@ -21,13 +25,36 @@ fn main() {
     //    let config_arc = Arc::new(config);
     log_main();
     info!("log init complete");
-    //TODO 启动一个线程
-    let parked_thread = thread::Builder::new()
-        .spawn(|| {
-            info!("Parking thread");
-            info!("Thread unparked");
-        })
-        .unwrap();
+    let unix_open = os_utils::is_windows();
+    let config_option = hawk_config::read_config();
+    let open_uds = open_uds(unix_open, config_option);
+    //开启unixsocket 启动一个线程
+    if open_uds {
+        let parked_thread = thread::Builder::new()
+            .spawn(|| {
+                unix_socket::main();
+            });
+        if parked_thread.is_err() {
+            error!("start unix socket server error");
+        }
+    }
+
     //make a http server
     http::main();
+}
+
+
+fn open_uds(unix_open: bool, config_option: Option<Config>) -> bool {
+    if unix_open {
+        if let Some(config) = config_option {
+            if let Some(server) = config.server {
+                if server.open_uds {
+                    return true;
+                }
+            }
+        }
+        false
+    } else {
+        false
+    }
 }

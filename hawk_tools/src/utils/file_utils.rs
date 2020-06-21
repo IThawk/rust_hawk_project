@@ -44,7 +44,6 @@ pub fn write_file(file_path: String, context: String, append: bool) -> Result<()
         };
     }
     error!("read {} error", file_path);
-
     Err(format!("read {} error", file_path))
 }
 

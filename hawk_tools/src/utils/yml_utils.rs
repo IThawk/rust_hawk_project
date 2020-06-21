@@ -1,16 +1,12 @@
 extern crate serde_yaml;
+extern crate hawk_api;
 
-use crate::model::config::{Config, Redis};
+use hawk_api::model::config::{Config, Redis};
 use crate::utils::file_utils::{read_file, write_file};
 use serde::de::DeserializeOwned;
 use serde::export::Result::Ok;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-struct Point {
-    x: f64,
-    y: f64,
-}
 
 pub fn read_yml<T>(path: &str) -> Result<T, String>
     where
@@ -44,6 +40,13 @@ pub fn write_yml<T>(path: &str, content: T) -> Result<(), String>
     Err("err".to_string())
 }
 
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
 #[test]
 fn read_test() {
     let point = Point { x: 1.0, y: 2.0 };
@@ -65,7 +68,7 @@ fn write_test() {
     let redis = Redis { port: 6379 };
     let redis = Some(redis);
 
-    let config = Config { redis, mysql: None };
+    let config = Config { redis, mysql: None, uds: None };
     let point = Point { x: 1.0, y: 2.0 };
     let result = write_yml("./config/my.yml", config);
     println!("{:?}", result)

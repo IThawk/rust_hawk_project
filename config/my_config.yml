@@ -1,0 +1,12 @@
+---
+redis:
+  port: 6379
+mysql:
+  port: 3306
+server:
+  port: 8080
+  uds: /home/ithawk/server.uds
+  open_uds: true
+log:
+  level: info
+  path: ./log/request.log

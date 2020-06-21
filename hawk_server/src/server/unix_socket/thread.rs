@@ -10,6 +10,8 @@ use json::JsonValue;
 use redis_async::resp::RespValue;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::path::PathBuf;
+use hawk_api::model::config::Config;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MyObj {
@@ -27,7 +29,7 @@ async fn index(item: web::Json<MyObj>) -> HttpResponse {
 /// http://localhost:8099/test
 async fn get_index(req: HttpRequest, item: web::Path<String>) -> HttpResponse {
     //get param from url
-    let  a = req.query_string();
+    let a = req.query_string();
     println!("query: {:?}", &a);
     println!("model: {:?}", &item);
     HttpResponse::Ok().json(item.into_inner()) // <- send response
@@ -39,7 +41,7 @@ async fn extract_item(item: web::Json<MyObj>, req: HttpRequest) -> HttpResponse 
     println!("model: {:?}", item);
     let head = req.head();
     let a = head.headers.get("mytest");
-    println!("{:?}",a);
+    println!("{:?}", a);
     HttpResponse::Ok().json(item.0) // <- send json response
 }
 
@@ -138,13 +140,22 @@ async fn del_stuff(redis: web::Data<Addr<RedisActor>>) -> Result<HttpResponse, E
     }
 }
 
+#[cfg(windows)]
+pub async fn main() -> std::io::Result<()> {
+    Ok(())
+}
+
 ///
 /// http main with actix_web
 ///
+//#[cfg(unix)]
 #[actix_rt::main]
+#[cfg(unix)]
 pub async fn main() -> std::io::Result<()> {
+    let config_option = hawk_config::read_config();
 
-    let ip_port = "127.0.0.1:8099";
+    let uds_path = get_unix_sock_path(config_option);
+
     HttpServer::new(|| {
         // use redis config
         let redis_addr = RedisActor::start("192.168.101.33:6379");
@@ -176,9 +187,22 @@ pub async fn main() -> std::io::Result<()> {
                     .route(web::get().to(get_index)),
             )
     })
-    .bind(ip_port)?
-    .run()
-    .await
+        .bind_uds(uds_path)?
+        .run()
+        .await
+}
+
+    fn get_unix_sock_path(config_option: Option<Config>) ->String{
+    if config_option.is_some() {
+        if let Some(config) = config_option {
+            if let Some(server) = config.server {
+                return server.uds;
+            }
+        }
+        return "/home/ithawk/server.uds".to_string();
+    } else {
+        "/home/ithawk/server.uds".to_string()
+    }
 }
 
 #[cfg(test)]
