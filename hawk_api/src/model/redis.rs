@@ -20,6 +20,8 @@ pub struct RedisConfig {
         skip_serializing_if = "String::is_empty"
     )]
     pub unix_path: String,
+
+    pub passwd: String,
 }
 
 impl RedisConfig {
@@ -37,6 +39,7 @@ impl Default for RedisConfig {
             ip: "127.0.0.1".to_string(),
             port: 6379,
             unix_path: "".to_string(),
+            passwd: "".to_string(),
         }
     }
 }

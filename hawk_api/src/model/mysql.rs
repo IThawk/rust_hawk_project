@@ -7,6 +7,8 @@ pub struct MysqlConfig {
     pub ip: String,
     #[serde(default = "MysqlConfig::default_port_i32")]
     pub port: i32,
+
+    pub passwd: String,
 }
 
 impl MysqlConfig {

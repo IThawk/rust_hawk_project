@@ -4,9 +4,8 @@ extern crate log;
 extern crate serde_derive;
 extern crate hawk_tools;
 
+pub mod config_center;
 pub mod model;
 pub mod traits;
 
-pub trait Connection {}
-
-pub trait Server {}
+pub const CONNECTION_CHAR: char = '@';

@@ -27,15 +27,15 @@ impl ClientConfig {
         false
     }
 
-    pub fn is_use_uds(&self)->Option<String>{
-        if os_utils::is_windows(){
-            return None
+    pub fn is_use_uds(&self) -> Option<String> {
+        if os_utils::is_windows() {
+            return None;
         }
-        if self.open_uds{
-            if !self.uds.is_empty(){
-                return Some(self.uds.clone())
+        if self.open_uds {
+            if !self.uds.is_empty() {
+                return Some(self.uds.clone());
             }
         }
-        return None
+        return None;
     }
 }

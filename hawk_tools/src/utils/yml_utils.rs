@@ -1,4 +1,3 @@
-
 extern crate serde_yaml;
 
 use crate::utils::file_utils::{read_file, write_file};
@@ -60,8 +59,6 @@ fn read_test() {
 
 #[test]
 fn write_test() {
-    let redis = Redis { port: 6379 };
-    let redis = Some(redis);
     let point = Point { x: 1.0, y: 2.0 };
-    println!("{:?}", result)
+    println!("{:?}", point)
 }

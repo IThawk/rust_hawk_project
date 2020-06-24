@@ -7,3 +7,9 @@ pub fn is_windows() -> bool {
         false
     }
 }
+
+#[test]
+fn write_test() {
+    let point = is_windows();
+    println!("{:?}", point)
+}

@@ -1,8 +1,8 @@
+use crate::model::client::ClientConfig;
 use crate::model::log::LogConfig;
 use crate::model::mysql::MysqlConfig;
 use crate::model::redis::RedisConfig;
 use crate::model::server::ServerConfig;
-use crate::model::client::ClientConfig;
 
 ///totalConfig
 /// read https://serde.rs/attr-skip-serializing.html
