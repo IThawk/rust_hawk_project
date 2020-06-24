@@ -4,5 +4,12 @@ members = [
    "hawk_server",
    "hawk_config",
    "hawk_api",
-   "hawk_tools"
+   "hawk_tools",
+   "hawk_proxy",
+   "hawk_chart_center",
+   "hawk_queue",
+   "hawk_cache",
+   "hawk_data",
+   "hawk_log_center",
+   "hawk_config_center"
 ]

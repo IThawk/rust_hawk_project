@@ -2,8 +2,10 @@
 extern crate log;
 #[macro_use]
 extern crate serde_derive;
-pub mod model;
+extern crate hawk_tools;
 
+pub mod model;
+pub mod traits;
 
 pub trait Connection {}
 

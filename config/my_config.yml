@@ -10,3 +10,8 @@ server:
 log:
   level: info
   path: ./log/request.log
+cliet:
+  ip: 127.0.0.1
+  port: 8080
+  uds: /home/ithawk/server.uds
+  open_uds: true

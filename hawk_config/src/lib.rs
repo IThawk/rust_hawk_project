@@ -1,17 +1,17 @@
 #[macro_use]
 extern crate log;
-extern crate hawk_tools;
 extern crate hawk_api;
+extern crate hawk_tools;
 
 pub mod log_config;
 
-use hawk_api::model::config::{Config, Redis};
-use hawk_tools::utils::file_utils::{read_file, write_file};
 use crate::log_config::logger_main;
+use hawk_api::model::config::Config;
+use hawk_api::model::redis::RedisConfig;
+use hawk_tools::utils::file_utils::{read_file, write_file};
 use log::LevelFilter;
 
 //pub mod utils;
-
 
 pub fn read_config() -> Option<Config> {
     let a = read_file("./config/my_config.yml".to_string());
@@ -30,7 +30,9 @@ pub fn read_config() -> Option<Config> {
 
 pub fn log_main() {
     let (level, path) = init_log_level();
-    if !path.is_empty() { logger_main(level, path.as_str()) }
+    if !path.is_empty() {
+        logger_main(level, path.as_str())
+    }
 }
 
 fn init_log_level() -> (LevelFilter, String) {
@@ -45,9 +47,9 @@ fn init_log_level() -> (LevelFilter, String) {
                 return (LevelFilter::Warn, path);
             } else if log.level == "error" {
                 return (LevelFilter::Error, path);
-            } else if log.level == "error"{
+            } else if log.level == "error" {
                 return (LevelFilter::Off, "".to_string());
-            } else  {
+            } else {
                 return (LevelFilter::Info, path);
             }
         }

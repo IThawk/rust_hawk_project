@@ -26,14 +26,14 @@ pub fn logger_main(level: LevelFilter, log_path: &str) {
                     .appender("stdout")
                     .appender("requests")
                     .build(level),
-            ) {
+            )
+        {
             let handle = log4rs::init_config(config);
             if let Err(e) = handle {
                 println!("init log error : {:?}", e);
             }
         };
     };
-
 
     // use handle to change logger configuration at runtime
 }
