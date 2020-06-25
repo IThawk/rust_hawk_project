@@ -39,7 +39,7 @@ fn main() {
     }
 
     //make a http server
-    http::main();
+    http::main("start".to_string());
 }
 
 fn open_uds(unix_open: bool, config_option: Option<Config>) -> bool {

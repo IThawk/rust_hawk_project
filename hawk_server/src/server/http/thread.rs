@@ -142,11 +142,11 @@ async fn del_stuff(redis: web::Data<Addr<RedisActor>>) -> Result<HttpResponse, E
 /// http main with actix_web
 ///
 #[actix_rt::main]
-pub async fn main() -> std::io::Result<()> {
+pub async fn main(centext: String) -> std::io::Result<()> {
     let ip_port = "127.0.0.1:8099";
     HttpServer::new(|| {
         // use redis config
-        let redis_addr = RedisActor::start("192.168.101.33:6379");
+        let redis_addr = RedisActor::start("127.0.0.1:6379");
         App::new()
             .data(redis_addr)
             // enable logger
