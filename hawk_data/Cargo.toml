@@ -32,4 +32,8 @@ deadpool = {version ="0.5" , features = ["managed"] ,default-features = false}
 hawk_api = {version = "0.1.0" ,path = "../hawk_api"}
 redis ="0.15"
 tokio={version = "0.2" , features =["full"]}
-async-trait= "0.1"
+
+
+# add test
+[[test]]
+name = "redis"

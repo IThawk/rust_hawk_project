@@ -39,25 +39,3 @@ impl Connection<RedisConfig, Config> for DbConnection<RedisConfig, Config> {
         unimplemented!()
     }
 }
-
-// #[tokio::test]
-async fn test_managed_basic() {
-    let redis_config = RedisConfig::default();
-    let pool = DbConnection::<RedisConfig, Pool>::connect_to_db(redis_config);
-    // println!("{:?}", c)
-    if let Ok(pool) = pool {
-        let mut conn = pool.get().await.unwrap();
-        cmd("SET")
-            .arg(&["deadpool/test_key", "42"])
-            .execute_async(&mut conn)
-            .await
-            .unwrap();
-        let mut conn = pool.get().await.unwrap();
-        let value: String = cmd("GET")
-            .arg(&["deadpool/test_key"])
-            .query_async(&mut conn)
-            .await
-            .unwrap();
-        assert_eq!(value, "42".to_string());
-    }
-}
