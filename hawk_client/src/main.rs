@@ -5,7 +5,7 @@ extern crate log;
 #[macro_use]
 extern crate tokio;
 mod client;
-use crate::client::http;
+use crate::client::{http, unix_socket};
 use hawk_config::log_main;
 use hawk_tools::utils::file_utils::read_file;
 use hawk_tools::utils::os_utils;
@@ -43,7 +43,7 @@ fn main() {
         .unwrap();
     //make a http server
     if opt.proto.as_str().eq("http"){
-        http::main("http://httpbin.org/ip".to_string());
+        unix_socket::main("http://127.0.0.1:8099/ip".to_string());
     }
 
 }
