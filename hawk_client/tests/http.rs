@@ -10,7 +10,7 @@ pub fn make_http_client() -> Client<HttpConnector, Body> {
 ///
 #[tokio::main]
 #[test]
-async fn test_pipeline() {
+async fn test_http() {
     let client = make_http_client();
     let res = client
         .get(Uri::from_static("http://httpbin.org/ip"))
@@ -20,3 +20,5 @@ async fn test_pipeline() {
     let buf = hyper::body::to_bytes(res).await.unwrap();
     println!("body: {:?}", buf);
 }
+
+

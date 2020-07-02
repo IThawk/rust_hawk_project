@@ -10,7 +10,12 @@ use serde::{Deserialize, Serialize};
 /// ```
 /// use hawk_tools::utils::json_utils::json_to_string;
 /// let point = Point { x: 1.0, y: 2.0 };
-/// let s = json_to_string(&point);
+/// #[derive(Debug, PartialEq, Serialize, Deserialize)]
+/// struct Point {
+///     x: f64,
+///     y: f64,
+/// }
+/// let s = json_to_string::<Point>(&point);
 /// ```
 ///
 pub fn json_to_string<T>(object: &T) -> Result<String, String>
@@ -29,8 +34,13 @@ where
 ///string to object
 /// ```
 /// use hawk_tools::utils::json_utils::string_to_object;
+/// #[derive(Debug, PartialEq, Serialize, Deserialize)]
+/// struct Point {
+///     x: f64,
+///     y: f64,
+/// }
 /// let point = "{\"x\":1.0,\"y\":2.0}";
-/// let s = string_to_object(&point);
+/// let s = string_to_object::<Point>(&point);
 /// ```
 ///
 pub fn string_to_object<T>(obj_str: &str) -> Result<T, String>
@@ -57,7 +67,7 @@ struct Point {
 #[test]
 fn to_json_test() {
     let point = Point { x: 1.0, y: 2.0 };
-    let s = json_to_string(&point);
+    let s = json_to_string::<Point>(&point);
     println!("{:?}", s);
     assert_eq!(s.unwrap(), "{\"x\":1.0,\"y\":2.0}");
 }

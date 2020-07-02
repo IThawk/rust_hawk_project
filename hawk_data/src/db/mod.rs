@@ -1,3 +1,4 @@
+pub mod postgres;
 pub mod redis;
 
 pub struct DbConnection<C, T> {

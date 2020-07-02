@@ -6,3 +6,4 @@ extern crate tokio;
 extern crate serde_derive;
 extern crate hawk_api;
 pub mod db;
+pub mod pool;

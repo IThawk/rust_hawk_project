@@ -57,10 +57,4 @@ fn read_test() {
     assert_eq!(point, deserialized_point);
 }
 
-#[test]
-fn write_test() {
-    let redis = Redis { port: 6379 };
-    let redis = Some(redis);
-    let point = Point { x: 1.0, y: 2.0 };
-    println!("{:?}", result)
-}
+
