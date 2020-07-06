@@ -20,5 +20,3 @@ async fn test_http() {
     let buf = hyper::body::to_bytes(res).await.unwrap();
     println!("body: {:?}", buf);
 }
-
-

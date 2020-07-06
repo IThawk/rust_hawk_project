@@ -4,6 +4,8 @@ use crate::CONNECTION_CHAR;
 use hawk_tools::utils::uuid_utils;
 use std::collections::HashMap;
 
+pub static FIRST_REVISION: &str = "0";
+
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct ServicesConfig {
     pub revision: String,
@@ -80,6 +82,16 @@ impl ServicesConfig {
                 }
             }
             self.revision = uuid_utils::get_revision();
+        }
+    }
+}
+
+impl Default for ServicesConfig {
+    fn default() -> Self {
+        ServicesConfig {
+            revision: FIRST_REVISION.to_string(),
+            paths: HashMap::new(),
+            positions: HashMap::new(),
         }
     }
 }

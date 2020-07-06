@@ -4,6 +4,7 @@ extern crate hawk_api;
 extern crate hawk_tools;
 
 pub mod log_config;
+pub mod read_config;
 
 use crate::log_config::logger_main;
 use hawk_api::model::config::Config;

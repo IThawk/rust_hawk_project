@@ -22,8 +22,8 @@ pub struct UnixStream {
 
 impl UnixStream {
     async fn connect<P>(path: P) -> std::io::Result<Self>
-        where
-            P: AsRef<Path>,
+    where
+        P: AsRef<Path>,
     {
         let unix_stream = tokio::net::UnixStream::connect(path).await?;
         Ok(Self { unix_stream })

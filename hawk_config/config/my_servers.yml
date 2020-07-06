@@ -1,0 +1,9 @@
+revision: ghgaqqkgb12ohzlnytd8
+paths:
+  IThawk@mytest@1.0.0@/test: /test
+positions:
+  IThawk@mytest@1.0.0@http:
+    proto: http
+    positions:
+      - 127.0.0.1:8080
+      - 127.0.0.1:8081

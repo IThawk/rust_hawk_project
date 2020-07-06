@@ -1,0 +1,12 @@
+project: IThawk
+name: mytest
+vision: 1.0.0
+paths:
+  - /test
+  - /index
+  - /test1
+positions:
+    - proto: http
+      positions:
+        - 127.0.0.1:8080
+        - 127.0.0.1:8081

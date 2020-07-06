@@ -6,7 +6,6 @@ extern crate log;
 extern crate tokio;
 mod client;
 
-
 use crate::client::{http, unix_socket};
 use hawk_config::log_main;
 use hawk_tools::utils::file_utils::read_file;

@@ -56,5 +56,3 @@ fn read_test() {
     let deserialized_point: Point = serde_yaml::from_str(&s).unwrap();
     assert_eq!(point, deserialized_point);
 }
-
-

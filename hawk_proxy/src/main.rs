@@ -6,15 +6,16 @@ extern crate hawk_api;
 extern crate hawk_config;
 extern crate hawk_tools;
 
+mod http;
 mod server;
-
+mod unix_socket;
 //use crate::config::config_center::ConfigCenter;
 use hawk_api::model::config::Config;
 use hawk_config::log_main;
 use hawk_tools::utils::file_utils::read_file;
 use hawk_tools::utils::os_utils;
-use server::http;
-use server::unix_socket;
+use server::http as server_http;
+// use server::unix_socket;
 use std::sync::Arc;
 use std::thread;
 
@@ -31,7 +32,7 @@ fn main() {
     //开启unixsocket 启动一个线程
     if open_uds {
         let parked_thread = thread::Builder::new().spawn(|| {
-            unix_socket::main();
+            // unix_socket::main();
         });
         if parked_thread.is_err() {
             error!("start unix socket server error");
@@ -39,7 +40,7 @@ fn main() {
     }
 
     //make a http server
-    http::main();
+    server_http::main("s".to_string());
 }
 
 fn open_uds(unix_open: bool, config_option: Option<Config>) -> bool {

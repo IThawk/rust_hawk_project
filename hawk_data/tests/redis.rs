@@ -5,7 +5,6 @@ use hawk_api::traits::Connection;
 use hawk_data::db::DbConnection;
 use redis::FromRedisValue;
 use std::io;
-
 /// test connect redis and test pipeline
 ///
 #[tokio::main]

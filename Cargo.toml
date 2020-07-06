@@ -11,5 +11,7 @@ members = [
    "hawk_cache",
    "hawk_data",
    "hawk_log_center",
-   "hawk_config_center"
+   "hawk_config_center",
+   "hawk_macros",
+   "hawk_function_macros"
 ]

@@ -32,4 +32,8 @@ hawk_tools = {version = "0.1.0" ,path = "../hawk_tools"}
 actix-postgres = "0.1.0"
 postgres = "0.17.3"
 mysql = "18.2.0"
-tokio = "0.2"
+tokio = { version = "0.2.2", features = ["fs", "net","macros", "io-std", "rt-util", "sync", "time", "test-util"] }
+futures-util = { version = "0.3", default-features = false }
+hyper ="0.13"
+http = "0.2"
+tokio-util = { version = "0.3", features = ["codec"] }
