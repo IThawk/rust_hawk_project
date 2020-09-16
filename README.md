@@ -1,7 +1,7 @@
 # server and client base on actix_web by IThawk 
 * hawk_server  server demo
     * server base on axtix_web
-* hawk_client
+* hawk_client  client demo
     * client base on axtix_web
 * hawk_config
     * config center:

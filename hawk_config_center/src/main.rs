@@ -6,15 +6,16 @@ extern crate hawk_api;
 extern crate hawk_config;
 extern crate hawk_tools;
 
-mod server;
+mod register;
+mod provider;
 
 //use crate::config::config_center::ConfigCenter;
 use hawk_api::model::config::Config;
 use hawk_config::log_main;
 use hawk_tools::utils::file_utils::read_file;
 use hawk_tools::utils::os_utils;
-use server::http;
-use server::unix_socket;
+use register::http;
+use register::unix_socket;
 use std::sync::Arc;
 use std::thread;
 

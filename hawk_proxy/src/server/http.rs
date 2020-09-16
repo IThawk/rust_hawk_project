@@ -1,6 +1,6 @@
 use crate::http::thread::http_proxy;
 use hyper::service::{make_service_fn, service_fn};
-use hyper::{Body, Client, Method, Request, Response, Server};
+use hyper::{Body, Client, Method, Request, Response, Server,};
 use std::convert::Infallible;
 use std::net::SocketAddr;
 use tokio::io;
@@ -12,8 +12,8 @@ use futures::FutureExt;
 use std::env;
 use std::error::Error;
 pub fn main(s: String) {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8100));
-    let client = HttpClient::new();
+    // let addr = SocketAddr::from(([127, 0, 0, 1], 8100));
+    // let client = HttpClient::new();
 
     // Create the runtime
     let mut rt = Runtime::new().unwrap();
