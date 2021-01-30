@@ -22,7 +22,7 @@ struct Opt {
     #[structopt(short, long, default_value = "http")]
     pub proto: String,
 
-    #[structopt(short = "u", long = "url", default_value = "http://httpbin.org/ip")]
+    #[structopt(short = "u", long = "url", default_value = "http://127.0.0.1:1337/kkkl")]
     pub url: String,
 }
 
@@ -42,6 +42,6 @@ fn main() {
     }
     //make a http server
     if opt.proto.as_str().eq("http") {
-        http::main("http://httpbin.org/ip".to_string())
+        http::main("http://127.0.0.1:1337/kkkl".to_string());
     }
 }
