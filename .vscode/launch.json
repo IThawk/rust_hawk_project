@@ -1,0 +1,459 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_client'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_client"
+                ],
+                "filter": {
+                    "name": "hawk_client",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hawk_client'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hawk_client",
+                    "--package=hawk_client"
+                ],
+                "filter": {
+                    "name": "hawk_client",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hawk_client'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hawk_client",
+                    "--package=hawk_client"
+                ],
+                "filter": {
+                    "name": "hawk_client",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'http'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=http",
+                    "--package=hawk_client"
+                ],
+                "filter": {
+                    "name": "http",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'uds'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=uds",
+                    "--package=hawk_client"
+                ],
+                "filter": {
+                    "name": "uds",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_api'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_api"
+                ],
+                "filter": {
+                    "name": "hawk_api",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_tools'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_tools"
+                ],
+                "filter": {
+                    "name": "hawk_tools",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_config'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_config"
+                ],
+                "filter": {
+                    "name": "hawk_config",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hawk_server'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hawk_server",
+                    "--package=hawk_server"
+                ],
+                "filter": {
+                    "name": "hawk_server",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hawk_server'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hawk_server",
+                    "--package=hawk_server"
+                ],
+                "filter": {
+                    "name": "hawk_server",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hawk_proxy'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hawk_proxy",
+                    "--package=hawk_proxy"
+                ],
+                "filter": {
+                    "name": "hawk_proxy",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hawk_proxy'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hawk_proxy",
+                    "--package=hawk_proxy"
+                ],
+                "filter": {
+                    "name": "hawk_proxy",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hawk_chart_center'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hawk_chart_center",
+                    "--package=hawk_chart_center"
+                ],
+                "filter": {
+                    "name": "hawk_chart_center",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hawk_chart_center'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hawk_chart_center",
+                    "--package=hawk_chart_center"
+                ],
+                "filter": {
+                    "name": "hawk_chart_center",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_queue'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_queue"
+                ],
+                "filter": {
+                    "name": "hawk_queue",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_cache'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_cache"
+                ],
+                "filter": {
+                    "name": "hawk_cache",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_data'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_data"
+                ],
+                "filter": {
+                    "name": "hawk_data",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'redis'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=redis",
+                    "--package=hawk_data"
+                ],
+                "filter": {
+                    "name": "redis",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_log_center'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_log_center"
+                ],
+                "filter": {
+                    "name": "hawk_log_center",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hawk_config_center'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hawk_config_center",
+                    "--package=hawk_config_center"
+                ],
+                "filter": {
+                    "name": "hawk_config_center",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hawk_config_center'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hawk_config_center",
+                    "--package=hawk_config_center"
+                ],
+                "filter": {
+                    "name": "hawk_config_center",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'hawk_macros'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=hawk_macros"
+                ],
+                "filter": {
+                    "name": "hawk_macros",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 't'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=t",
+                    "--package=hawk_macros"
+                ],
+                "filter": {
+                    "name": "t",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 't'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=t",
+                    "--package=hawk_function_macros"
+                ],
+                "filter": {
+                    "name": "t",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
